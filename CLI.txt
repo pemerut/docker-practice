@@ -1,9 +1,11 @@
-building an image
-docker build .
+docker run node
+Unable to find image 'node:latest' locally
+latest: Pulling from library/node
 
-but first wake up docker daemon
-systemctl start docker
+docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS                     PORTS     NAMES
+0daa0572d0a4   node      "docker-entrypoint.s…"   2 minutes ago   Exited (0) 2 minutes ago             nostalgic_mirzakhani
 
-docker build -t node-server:1.0 .
+docker run -it node
+Welcome to Node.js v26.13.0.
 
-docker run -p 3000:3000 4a49e6e3191f
