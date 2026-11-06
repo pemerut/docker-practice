@@ -1,27 +1,17 @@
-docker ps
-CONTAINER ID   IMAGE          COMMAND                  CREATEDSTATUS         PORTS                                     NAMES
-16a96cd41431   582ee6cccc86   "docker-entrypoint.s…"   50 seconds agoUp 3 seconds   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   elegant_edison
-pemerut@pc:~/Lab/docker$ docker stop 16a96cd41431
-16a96cd41431
+docker images -a
+<untagged>             b93a65131a99       1.63GB          419MB
 
-docker ps
-CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-pemerut@pc:~/Lab/docker$ docker ps -a
-CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS                        PORTS     NAMES
-16a96cd41431   582ee6cccc86   "docker-entrypoint.s…"   3 minutes ago   Exited (137) 24 seconds ago             elegant_edison
-pemerut@pc:~/Lab/docker$ 
+docker run b93a65131a99
+Please enter the min number: Traceback (most recent call last):
+  File "/app/rng.py", line 3, in <module>
+    min_number = int(input('Please enter the min number: '))
+                     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+EOFError: EOF when reading a line
 
+docker stop ffb469866bce
+ffb469866bce
 
-docker attach 16a96cd41431
-cannot attach to a stopped container, start it first
-
-docker ps
-CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                                     NAMES
-16a96cd41431   582ee6cccc86   "docker-entrypoint.s…"   5 minutes ago   Up 2 seconds   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   elegant_edison
-pemerut@pc:~/Lab/docker$ docker attach 16a96cd41431
-
-
-docker logs 16a96cd41431
-bleb bleb
-fdfdf
-fdfdf
+docker start -ai ffb469866bce
+Please enter the min number: 2
+Please enter the max number: 4
+4
