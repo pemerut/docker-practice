@@ -1,7 +1,6 @@
-docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "/home/pemerut/Lab/docker/data-volumes-01-starting-setup:/app" -v /app/node_modules feedback:volumes
-ee0a3c7c7b42b1b76cafe035e76f6fbc34ac9af075d9e68f898fc7ada6bd3d37
+docker logs feedback-app
+TEST
 
-docker ps
-CONTAINER ID   IMAGE              COMMAND                  CREATED          STATUS          PORTS                                     NAMES
-ee0a3c7c7b42   feedback:volumes   "docker-entrypoint.s…"   13 seconds ago   Up 12 seconds   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   feedback-app
-
+docker run -d -p 3000:80 --name feedback-app --rm -v feedback:/app/feedback -v "/home/pemerut/Lab/docker/data-volumes-01-starting-setup:/app:ro" -v /app/temp -v /app/node_modules
+ feedback:volumes
+7b56aa1253a9a4111e7f57fdc88f28764423f416b0c38bee25807c5504d2b723
