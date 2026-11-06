@@ -1,17 +1,9 @@
-docker images -a
-<untagged>             b93a65131a99       1.63GB          419MB
-
-docker run b93a65131a99
-Please enter the min number: Traceback (most recent call last):
-  File "/app/rng.py", line 3, in <module>
-    min_number = int(input('Please enter the min number: '))
-                     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-EOFError: EOF when reading a line
-
-docker stop ffb469866bce
-ffb469866bce
-
-docker start -ai ffb469866bce
-Please enter the min number: 2
-Please enter the max number: 4
-4
+ocker image inspect c0b072037b7b
+[
+    {
+        "Id": "sha256:c0b072037b7b539d1c1ee276442a0a1b670ee5cb93e1cf0d535b5978712b684c",
+        "RepoTags": [
+            "node-server:latest"
+        ],
+        "RepoDigests": [
+            "node-server@sha256:c0b072037b7b539d1c1ee276442a0a1b670ee5cb93e1cf0d535b5978712b684c"
