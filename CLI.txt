@@ -1,9 +1,12 @@
-ocker image inspect c0b072037b7b
-[
-    {
-        "Id": "sha256:c0b072037b7b539d1c1ee276442a0a1b670ee5cb93e1cf0d535b5978712b684c",
-        "RepoTags": [
-            "node-server:latest"
-        ],
-        "RepoDigests": [
-            "node-server@sha256:c0b072037b7b539d1c1ee276442a0a1b670ee5cb93e1cf0d535b5978712b684c"
+docker run -d -p 3000:80 c0b072037b7b
+e1d55bc8d0c9709e39b3dabde4df1801b0e0ff0ff964b0cb4b62e0272f5c2f4c
+
+docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                                     NAMES
+e1d55bc8d0c9   c0b072037b7b   "docker-entrypoint.s…"   4 seconds ago   Up 3 seconds   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   loving_mccarthy
+
+docker cp dummy/. e1d55bc8d0c9:/test
+Successfully copied 6B (transferred 2.56kB) to e1d55bc8d0c9:/test
+
+docker cp e1d55bc8d0c9:/test dummy
+Successfully copied 2.56kB to /home/pemerut/Lab/docker/dummy
