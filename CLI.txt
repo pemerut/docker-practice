@@ -1,12 +1,9 @@
+docker rmi 0b1579ccfca0
 docker build .
-docker ps
-docker ps -a
-docker images -a
 
-docker run -d -p 80:80 0b1579ccfca08676c74dddbc8e8c
-docker stop 0b1579ccfca08676c74dddbc8e8c
+docker run -d -p 3000:80 799854c2e2a4d
+bac3d770099b1e2c8692535c46b4ed0c279e2619dbc47ae142300383fcad120f
 
-docker run -d -p 3000:80 0b1579ccfca0
 curl localhost:3000
 
     <html>
@@ -15,7 +12,7 @@ curl localhost:3000
       </head>
       <body>
         <section>
-          <h2>My Course Goal</h2>
+          <h2>My Course Goal!</h2>
           <h3>Learn Docker!</h3>
         </section>
         <form action="/store-goal" method="POST">
@@ -27,11 +24,3 @@ curl localhost:3000
         </form>
       </body>
     </html>
-
-
-docker ps
-CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS          PORTS                                     NAMES
-23d5eedc5cbf   0b1579ccfca0   "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   blissful_ride
-
-docker stop 23d5eedc5cbf
-23d5eedc5cbf
