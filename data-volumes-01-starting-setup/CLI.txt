@@ -1,16 +1,18 @@
-docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback:volumes
-49c0751c6010f027a587115403a6f7c819657a301a94fa3afb62fd7d70c4373e
-
-docker volume ls
-DRIVER    VOLUME NAME
-local     feedback
-
 docker stop feedback-app
 feedback-app
 
-docker volume ls
-DRIVER    VOLUME NAME
-local     feedback
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/home/pemerut/Lab/do
+cker/data-volumes-01-starting-setup:/app" feedback:volumes
+a6615f76a9a54889c7a771c1a35652a217e85904099f586d28e4c8cfcc956559
 
-docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback:volumes
-b27986089b2b2c7acc847bc508466198d100a3686d2ebc4f205c471d963ffccb
+docker ps -a
+CONTAINER ID   IMAGE              COMMAND                  CREATED         STATUS                     PORTS     NAMES
+5e45802ce540   feedback:volumes   "docker-entrypoint.s…"   9 seconds ago   Exited (1) 8 seconds ago             feedback-app
+
+docker logs feedback-a
+pp
+internal/modules/cjs/loader.js:934
+  throw err;
+  ^
+
+Error: Cannot find module 'express'
