@@ -1,26 +1,14 @@
-docker rmi 0b1579ccfca0
+docker rmi 799854c2e2a4
+
 docker build .
+[+] Building 14.4s (10/10) FINISHED                      docker:default
 
-docker run -d -p 3000:80 799854c2e2a4d
-bac3d770099b1e2c8692535c46b4ed0c279e2619dbc47ae142300383fcad120f
 
-curl localhost:3000
+<untagged>             582ee6cccc86       1.81GB          449MB
 
-    <html>
-      <head>
-        <link rel="stylesheet" href="styles.css">
-      </head>
-      <body>
-        <section>
-          <h2>My Course Goal!</h2>
-          <h3>Learn Docker!</h3>
-        </section>
-        <form action="/store-goal" method="POST">
-          <div class="form-control">
-            <label>Course Goal</label>
-            <input type="text" name="goal">
-          </div>
-          <button>Set Course Goal</button>
-        </form>
-      </body>
-    </html>
+After changing the code
+docker build .
+[+] Building 0.4s (10/10) FINISHED                       docker:default
+
+<untagged>             7d4680d23e6f       1.81GB          449MB        
+<untagged>             582ee6cccc86       1.81GB          449MB   
