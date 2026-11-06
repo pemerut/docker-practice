@@ -1,0 +1,7 @@
+
+docker run -d -p 3000:80 --rm feedback
+991145da567e1e1a7d2f61d89df5fa17333b1bcb050a11c9fc200f3b767c4e85
+pemerut@pc:~/Lab/docker/data-volumes-01-starting-setup$ docker ps
+CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS    PORTS                                     NAMES
+991145da567e   feedback   "docker-entrypoint.s…"   4 seconds ago   Up 4 seconds   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   dazzling_nightingale
+pemerut@pc:~/Lab/docker/data-volumes-01-starting-setup$ 
