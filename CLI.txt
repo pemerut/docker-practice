@@ -5,3 +5,33 @@ docker images -a
 
 docker run -d -p 80:80 0b1579ccfca08676c74dddbc8e8c
 docker stop 0b1579ccfca08676c74dddbc8e8c
+
+docker run -d -p 3000:80 0b1579ccfca0
+curl localhost:3000
+
+    <html>
+      <head>
+        <link rel="stylesheet" href="styles.css">
+      </head>
+      <body>
+        <section>
+          <h2>My Course Goal</h2>
+          <h3>Learn Docker!</h3>
+        </section>
+        <form action="/store-goal" method="POST">
+          <div class="form-control">
+            <label>Course Goal</label>
+            <input type="text" name="goal">
+          </div>
+          <button>Set Course Goal</button>
+        </form>
+      </body>
+    </html>
+
+
+docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS          PORTS                                     NAMES
+23d5eedc5cbf   0b1579ccfca0   "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   blissful_ride
+
+docker stop 23d5eedc5cbf
+23d5eedc5cbf
