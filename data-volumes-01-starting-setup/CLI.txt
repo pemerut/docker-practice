@@ -1,6 +1,4 @@
-docker logs feedback-app
-TEST
-
-docker run -d -p 3000:80 --name feedback-app --rm -v feedback:/app/feedback -v "/home/pemerut/Lab/docker/data-volumes-01-starting-setup:/app:ro" -v /app/temp -v /app/node_modules
- feedback:volumes
-7b56aa1253a9a4111e7f57fdc88f28764423f416b0c38bee25807c5504d2b723
+docker run -d -p 3000:8000 --name feedback-app --rm -v feedback:/app/feedback -v "/home/pemerut/Lab/
+docker/data-volumes-01-starting-setup:/app:ro" -v /app/temp -v /app/node_modul
+es --env PORT=8000 feedback:env
+d273c739b69803f59a37c098843e22de6244def6eef47ceac0949dedf5a66176
