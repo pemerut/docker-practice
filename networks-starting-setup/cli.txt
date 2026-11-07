@@ -1,0 +1,22 @@
+ocker run --name favorites --rm -d -p 3000:3000 favorites
+86bcaf07a90c2d52904505888d7d3879dfc89bcbe9492ed373648c1080e51915
+
+docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+pemerut@pc:~/Lab/docker/networks-starting-setup$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+docker run --name favorites --rm -p 3000:3000 favorites
+(node:1) [MONGODB DRIVER] Warning: Current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+
+docker build -t favorites .
+[+] Building 0.2s (10/10) FINISHED
+
+ocker run -d --name favo
+rites --rm -p 3000:3000 favorites
+b1fde2fc9fb8e64d226cd4a43d4c0eedd8070788334be2e362894c73840be8c9
+
+docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS          PORTS                                         NAMES
+b1fde2fc9fb8   favorites   "docker-entrypoint.s…"   12 seconds ago   Up 11 seconds   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp   favorites
+
