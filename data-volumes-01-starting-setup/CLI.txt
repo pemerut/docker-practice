@@ -1,2 +1,0 @@
-docker build -t feedback:web-app .
-docker build -t feedback:dev --build-arg DEFAULT_PORT=8000 .
