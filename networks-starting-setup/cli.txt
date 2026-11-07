@@ -15,3 +15,5 @@ CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS      
 ab3c5a793603   favorites   "docker-entrypoint.s…"   6 seconds ago   Up 5 seconds   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp   favorites
 1486e8d11791   mongo       "docker-entrypoint.s…"   9 minutes ago   Up 9 minutes   27017/tcp
 
+docker run -d --rm --name favorites -p 3000:3000 --network favorites-net favorites
+ddeb6c763e6b265b74d99c9e8b15cbdbc59e44373f507093292ee7d12688eb8c
