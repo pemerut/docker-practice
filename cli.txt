@@ -1,0 +1,12 @@
+docker network ls
+NETWORK ID     NAME        DRIVER    SCOPE
+b54738f3204b   bridge      bridge    local
+d34fa2dd1a5a   goals-net   bridge    local
+e814843fd42d   host        host      local
+261dd17e7364   none        null      local
+
+docker run --name goals-back --network goals-net -p 80:80 --rm -d goals-back
+
+docker run --network goals-net --rm -d --name mongo -v mongo-data:/data/db mongo
+
+docker run --name goals-front --rm -p 3000:3000 -it goals-front
