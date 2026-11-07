@@ -1,4 +1,6 @@
 docker run --name goals-back --rm -p 80:80 --network goals-net -v log:/app/logs -v /home/pemerut/Lab/docker/backend:/app -v /app/node_modules
  goals-back
 
+ docker run --name goals-front --rm -p 3000:3000 -it -v /home/pemerut/Lab/docker/frontend/src:/app/src goals-front
+
  
