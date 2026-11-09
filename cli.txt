@@ -1,7 +1,0 @@
-docker run -it node-util npm init
-This utility will walk you through creating a package.json file.
-
-docker run -it -v /home/pemerut/Lab/docker/:/app node-util npm init
-This utility will walk you through creating a package.json file.
-It only covers the most common items, and tries to guess sensible defaults.
-
