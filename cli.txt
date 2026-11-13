@@ -1,3 +1,0 @@
-docker-compose run --rm artisan migrate
-Building artis
-
