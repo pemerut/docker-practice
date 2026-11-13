@@ -1,16 +1,3 @@
-curl http://13.51.194.135:80
-\<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Deployment Example</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <main>
-    <h1>This works!</h1>
-    <h2>Congratulations, this app seems to run fine!</h2>
-  </main>
-</body>
-</html>
+docker ps
+CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS         PORTS                               NAMES
+dbfadf8a320e   pemerut/app   "docker-entrypoint.s…"   4 seconds ago   Up 2 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp   silly_lewin
