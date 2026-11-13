@@ -1,8 +1,16 @@
-ssh -i example01.pem ec2-user@13.51.194.135
-
-sudo yum update -y
-sudo yum -y install docker
- 
-sudo service docker start
- 
-sudo usermod -a -G docker ec2-user
+curl http://13.51.194.135:80
+\<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deployment Example</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <h1>This works!</h1>
+    <h2>Congratulations, this app seems to run fine!</h2>
+  </main>
+</body>
+</html>
