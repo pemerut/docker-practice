@@ -1,13 +1,15 @@
-docker tag app:latest pemerut/app:latest
-docker push pemerut/app:latest
+kubectl expose deployment app --type=LoadBalancer --port=8080
+service/app exposed
 
-kubectl create deployment app --image=pemerut/app:latest
-deployment.apps/app created
+kubectl get services
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+app          LoadBalancer   10.99.162.106   <pending>     8080:31422/TCP   100s
+kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          121m
 
-kubectl get deployment
-NAME   READY   UP-TO-DATE   AVAILABLE   AGE
-app    1/1     1            1           36s
-
-kubectl get pods
-NAME                   READY   STATUS    RESTARTS   AGE
-app-6bfc46959c-62h7j   1/1     Running   0          65s
+minikube service app
+┌───────────┬──────┬─────────────┬───────────────────────────┐
+│ NAMESPACE │ NAME │ TARGET PORT │            URL            │
+├───────────┼──────┼─────────────┼───────────────────────────┤
+│ default   │ app  │ 8080        │ http://192.168.49.2:31422 │
+└───────────┴──────┴─────────────┴───────────────────────────┘
+🎉  Opening service default/app in default browser...
