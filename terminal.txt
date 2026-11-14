@@ -1,15 +1,22 @@
-kubectl expose deployment app --type=LoadBalancer --port=8080
-service/app exposed
+ kubectl scale deployment/app --replicas=3
+deployment.apps/app scaled
 
-kubectl get services
-NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-app          LoadBalancer   10.99.162.106   <pending>     8080:31422/TCP   100s
-kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          121m
+kubectl get deployment
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+app    3/3     3            3           161m
 
-minikube service app
-┌───────────┬──────┬─────────────┬───────────────────────────┐
-│ NAMESPACE │ NAME │ TARGET PORT │            URL            │
-├───────────┼──────┼─────────────┼───────────────────────────┤
-│ default   │ app  │ 8080        │ http://192.168.49.2:31422 │
-└───────────┴──────┴─────────────┴───────────────────────────┘
-🎉  Opening service default/app in default browser...
+kubectl get pods
+NAME                   READY   STATUS    RESTARTS      AGE
+app-6bfc46959c-62h7j   1/1     Running   3 (23m ago)   162m
+app-6bfc46959c-pnhth   1/1     Running   0             53s
+app-6bfc46959c-x9n55   1/1     Running   0             53s
+
+kubectl scale deployment/app --replicas=1
+deployment.apps/app scaled
+
+kubectl get pods
+NAME                   READY   STATUS        RESTARTS      AGE
+app-6bfc46959c-62h7j   1/1     Running       4 (80s ago)   164m
+app-6bfc46959c-pnhth   1/1     Terminating   1 (54s ago)   3m15s
+app-6bfc46959c-x9n55   1/1     Terminating   2 (52s ago)   3m15s
+
