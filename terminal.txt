@@ -1,3 +1,32 @@
-docker ps
-CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS         PORTS                               NAMES
-dbfadf8a320e   pemerut/app   "docker-entrypoint.s…"   4 seconds ago   Up 2 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp   silly_lewin
+docker build -t app .
+
+minikube status
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+
+kubectl get deployments
+No resources found in default namespace.
+
+kubectl create deployment app --image=app
+deployment.apps/app created
+
+kubectl get deployments
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+app    0/1     1            0           21s
+
+kubectl get pods
+NAME                   READY   STATUS             RESTARTS   AGE
+app-65486848c5-g6p95   0/1     ImagePullBackOff   0          48s
+
+kubectl delete deployment app
+deployment.apps "app" deleted from default namespace
+
+kubectl get pods
+No resources found in default namespace.
+
+kubectl get deployments
+No resources found in default namespace.
