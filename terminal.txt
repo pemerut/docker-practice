@@ -1,32 +1,13 @@
-docker build -t app .
+docker tag app:latest pemerut/app:latest
+docker push pemerut/app:latest
 
-minikube status
-minikube
-type: Control Plane
-host: Running
-kubelet: Running
-apiserver: Running
-kubeconfig: Configured
-
-kubectl get deployments
-No resources found in default namespace.
-
-kubectl create deployment app --image=app
+kubectl create deployment app --image=pemerut/app:latest
 deployment.apps/app created
 
-kubectl get deployments
+kubectl get deployment
 NAME   READY   UP-TO-DATE   AVAILABLE   AGE
-app    0/1     1            0           21s
+app    1/1     1            1           36s
 
 kubectl get pods
-NAME                   READY   STATUS             RESTARTS   AGE
-app-65486848c5-g6p95   0/1     ImagePullBackOff   0          48s
-
-kubectl delete deployment app
-deployment.apps "app" deleted from default namespace
-
-kubectl get pods
-No resources found in default namespace.
-
-kubectl get deployments
-No resources found in default namespace.
+NAME                   READY   STATUS    RESTARTS   AGE
+app-6bfc46959c-62h7j   1/1     Running   0          65s
