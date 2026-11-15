@@ -1,22 +1,31 @@
- kubectl scale deployment/app --replicas=3
-deployment.apps/app scaled
+docker push pemerut/app:1
 
-kubectl get deployment
+kubectl set image deployment/app app=pemerut/app:1
+deployment.apps/app image updated
+
+kubectl get deployments
 NAME   READY   UP-TO-DATE   AVAILABLE   AGE
-app    3/3     3            3           161m
+app    1/1     1            1           176m
+
+kubectl rollout status deployment/app
+deployment "app" successfully rolled out
+
+
+
+kubectl set image deployment/app app=pemerut/app:3
+deployment.apps/app image updated
+
+kubectl rollout status deployment/app
+Waiting for deployment "app" rollout to finish: 1 old replicas are pending termination...
 
 kubectl get pods
-NAME                   READY   STATUS    RESTARTS      AGE
-app-6bfc46959c-62h7j   1/1     Running   3 (23m ago)   162m
-app-6bfc46959c-pnhth   1/1     Running   0             53s
-app-6bfc46959c-x9n55   1/1     Running   0             53s
+NAME                   READY   STATUS             RESTARTS   AGE
+app-546dc9fddc-trgvk   0/1     ImagePullBackOff   0          84s
+app-bdff6b99c-tt2zk    1/1     Running            0          8m28s
 
-kubectl scale deployment/app --replicas=1
-deployment.apps/app scaled
+kubectl rollout undo deployment/app
+deployment.apps/app rolled back
 
 kubectl get pods
-NAME                   READY   STATUS        RESTARTS      AGE
-app-6bfc46959c-62h7j   1/1     Running       4 (80s ago)   164m
-app-6bfc46959c-pnhth   1/1     Terminating   1 (54s ago)   3m15s
-app-6bfc46959c-x9n55   1/1     Terminating   2 (52s ago)   3m15s
-
+NAME                  READY   STATUS    RESTARTS   AGE
+app-bdff6b99c-tt2zk   1/1     Running   0          10m
