@@ -1,31 +1,8 @@
-docker push pemerut/app:1
-
-kubectl set image deployment/app app=pemerut/app:1
-deployment.apps/app image updated
-
-kubectl get deployments
-NAME   READY   UP-TO-DATE   AVAILABLE   AGE
-app    1/1     1            1           176m
-
-kubectl rollout status deployment/app
-deployment "app" successfully rolled out
-
-
-
-kubectl set image deployment/app app=pemerut/app:3
-deployment.apps/app image updated
-
-kubectl rollout status deployment/app
-Waiting for deployment "app" rollout to finish: 1 old replicas are pending termination...
+kubectl delete deployment app
+deployment.apps "app" deleted from default namespace
 
 kubectl get pods
-NAME                   READY   STATUS             RESTARTS   AGE
-app-546dc9fddc-trgvk   0/1     ImagePullBackOff   0          84s
-app-bdff6b99c-tt2zk    1/1     Running            0          8m28s
+NAME                  READY   STATUS        RESTARTS   AGE
+app-bdff6b99c-tt2zk   1/1     Terminating   0          170m
 
-kubectl rollout undo deployment/app
-deployment.apps/app rolled back
-
-kubectl get pods
-NAME                  READY   STATUS    RESTARTS   AGE
-app-bdff6b99c-tt2zk   1/1     Running   0          10m
+kubectl apply -f=deployment.yaml
