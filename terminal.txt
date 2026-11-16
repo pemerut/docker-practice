@@ -1,16 +1,8 @@
-kubectl apply -f service.yaml
-service/backend created
+kubectl apply -f deployment.yaml
+deployment.apps/app2 configured
 
-kubectl get services
-NAME         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-app          LoadBalancer   10.99.162.106    <pending>     8080:31422/TCP   2d2h
-backend      LoadBalancer   10.100.237.204   <pending>     80:31163/TCP     16s
-kubernetes   ClusterIP      10.96.0.1        <none>        443/TCP          2d4h
-
-minikube service backend
-┌───────────┬─────────┬─────────────┬───────────────────────────┐
-│ NAMESPACE │  NAME   │ TARGET PORT │            URL            │
-├───────────┼─────────┼─────────────┼───────────────────────────┤
-│ default   │ backend │ 80          │ http://192.168.49.2:31163 │
-└───────────┴─────────┴─────────────┴───────────────────────────┘
-🎉  Opening service default/backend in default browser...
+kubectl get pod
+NAME                   READY   STATUS    RESTARTS       AGE
+app2-876766ffb-k6vxf   1/1     Running   1 (4h3m ago)   44h
+app2-876766ffb-tdwjw   1/1     Running   0              9s
+app2-876766ffb-wbp4p   1/1     Running   0              9s
