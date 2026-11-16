@@ -1,0 +1,16 @@
+kubectl apply -f service.yaml
+service/backend created
+
+kubectl get services
+NAME         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+app          LoadBalancer   10.99.162.106    <pending>     8080:31422/TCP   2d2h
+backend      LoadBalancer   10.100.237.204   <pending>     80:31163/TCP     16s
+kubernetes   ClusterIP      10.96.0.1        <none>        443/TCP          2d4h
+
+minikube service backend
+┌───────────┬─────────┬─────────────┬───────────────────────────┐
+│ NAMESPACE │  NAME   │ TARGET PORT │            URL            │
+├───────────┼─────────┼─────────────┼───────────────────────────┤
+│ default   │ backend │ 80          │ http://192.168.49.2:31163 │
+└───────────┴─────────┴─────────────┴───────────────────────────┘
+🎉  Opening service default/backend in default browser...
