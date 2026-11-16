@@ -1,23 +1,8 @@
-kubectl delete -f deployment.yaml,service.yaml
-deployment.apps "app2" deleted from default namespace
-service "backend" deleted from default namespace
-
-kubectl get deployments
-No resources found in default namespace.
-
-kubectl get services
-NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-app          LoadBalancer   10.99.162.106   <pending>     8080:31422/TCP   2d2h
-kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          2d4h
-
 kubectl apply -f master-deployment.yaml
 service/backend created
-deployment.apps/app2 created
+deployment.apps/app2 unchanged
 
-minikube service backend
-┌───────────┬─────────┬─────────────┬───────────────────────────┐
-│ NAMESPACE │  NAME   │ TARGET PORT │            URL            │
-├───────────┼─────────┼─────────────┼───────────────────────────┤
-│ default   │ backend │ 80          │ http://192.168.49.2:30173 │
-└───────────┴─────────┴─────────────┴───────────────────────────┘
-
+kubectl delete deployments,services -l grou
+p=example
+deployment.apps "app2" deleted from default namespace
+service "backend" deleted from default namespace
