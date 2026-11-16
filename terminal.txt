@@ -1,15 +1,23 @@
-kubectl apply -f deployment.yaml
-deployment.apps/app2 configured
+kubectl delete -f deployment.yaml,service.yaml
+deployment.apps "app2" deleted from default namespace
+service "backend" deleted from default namespace
 
-kubectl get pods
-NAME                   READY   STATUS        RESTARTS       AGE
-app2-876766ffb-k6vxf   1/1     Running       1 (4h6m ago)   44h
-app2-876766ffb-tdwjw   1/1     Terminating   0              3m33s
-app2-876766ffb-wbp4p   1/1     Terminating   0              3m33s
+kubectl get deployments
+No resources found in default namespace.
 
-kubectl get pods
-NAME                   READY   STATUS    RESTARTS       AGE
-app2-876766ffb-k6vxf   1/1     Running   1 (4h7m ago)   44h
+kubectl get services
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+app          LoadBalancer   10.99.162.106   <pending>     8080:31422/TCP   2d2h
+kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          2d4h
 
-kubectl apply -f deployment.yaml
-deployment.apps/app2 configured
+kubectl apply -f master-deployment.yaml
+service/backend created
+deployment.apps/app2 created
+
+minikube service backend
+┌───────────┬─────────┬─────────────┬───────────────────────────┐
+│ NAMESPACE │  NAME   │ TARGET PORT │            URL            │
+├───────────┼─────────┼─────────────┼───────────────────────────┤
+│ default   │ backend │ 80          │ http://192.168.49.2:30173 │
+└───────────┴─────────┴─────────────┴───────────────────────────┘
+
