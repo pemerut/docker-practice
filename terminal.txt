@@ -1,8 +1,15 @@
 kubectl apply -f deployment.yaml
 deployment.apps/app2 configured
 
-kubectl get pod
+kubectl get pods
+NAME                   READY   STATUS        RESTARTS       AGE
+app2-876766ffb-k6vxf   1/1     Running       1 (4h6m ago)   44h
+app2-876766ffb-tdwjw   1/1     Terminating   0              3m33s
+app2-876766ffb-wbp4p   1/1     Terminating   0              3m33s
+
+kubectl get pods
 NAME                   READY   STATUS    RESTARTS       AGE
-app2-876766ffb-k6vxf   1/1     Running   1 (4h3m ago)   44h
-app2-876766ffb-tdwjw   1/1     Running   0              9s
-app2-876766ffb-wbp4p   1/1     Running   0              9s
+app2-876766ffb-k6vxf   1/1     Running   1 (4h7m ago)   44h
+
+kubectl apply -f deployment.yaml
+deployment.apps/app2 configured

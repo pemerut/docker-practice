@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: app2
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: second-app
@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
         - name: second-node
-          image: pemerut/app:1
+          image: pemerut/app
