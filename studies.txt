@@ -1,0 +1,25 @@
+Kubernetes (K8s) - Container orchestration platform
+
+Orchestration - Automated coordination and management of workloads
+
+Cluster	- Set of machines managed together by Kubernetes
+
+Node - Machine participating in a cluster
+
+Control plane - Components that manage the cluster
+
+Worker node	- Machine that runs application workloads
+
+Pod	- Smallest deployable compute unit, containing one or more containers
+
+Container runtime - Software that runs containers
+
+Desired state - Configuration that Kubernetes should achieve
+
+Actual state - Current observed condition of the cluster
+
+Controller - Component that continuously works to reconcile state
+
+Reconciliation - Correcting differences between desired and actual state
+
+Replica - An instance of a workload, commonly represented by a Pod
