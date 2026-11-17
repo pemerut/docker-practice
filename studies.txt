@@ -1,3 +1,5 @@
+Lesson 1
+
 Kubernetes (K8s) - Container orchestration platform
 
 Orchestration - Automated coordination and management of workloads
@@ -23,3 +25,32 @@ Controller - Component that continuously works to reconcile state
 Reconciliation - Correcting differences between desired and actual state
 
 Replica - An instance of a workload, commonly represented by a Pod
+
+
+Lesson 2
+
+The Control plane
+
+    kube-apiserver - Exposes the Kubernetes API
+    etcd - Stores cluster state persistently
+    kube-scheduler - Selects nodes for unscheduled Pods
+    kube-controller-manager - Runs controllers that reconcile cluster state
+
+The Worker node
+
+    kubelet	- Ensures assigned Pods run on the node
+    Container runtime - Creates and runs containers
+    kube-proxy - Implements Service traffic forwarding rules
+
+kube-apiserver — The central communication point
+etcd — The cluster's persistent database
+kube-scheduler — Choosing where Pods should run
+kube-controller-manager — Maintaining the desired state
+
+Examples of controllers
+
+Deployment controller - Manages ReplicaSets for Deployments
+ReplicaSet controller - Maintains the desired number of matching Pods
+Node controller	- Monitors node health and handles relevant node lifecycle operations
+Job controller - Manages Pods that perform tasks intended to complete
+ServiceAccount controller - Manages aspects of ServiceAccount lifecycle
