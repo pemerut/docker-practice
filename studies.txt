@@ -27,7 +27,7 @@ Reconciliation - Correcting differences between desired and actual state
 Replica - An instance of a workload, commonly represented by a Pod
 
 
-Lesson 2
+Lesson 2.1
 
 The Control plane
 
@@ -54,3 +54,16 @@ ReplicaSet controller - Maintains the desired number of matching Pods
 Node controller	- Monitors node health and handles relevant node lifecycle operations
 Job controller - Manages Pods that perform tasks intended to complete
 ServiceAccount controller - Manages aspects of ServiceAccount lifecycle
+
+
+Lesson 2.1
+
+kubelet — The node agent
+
+The scheduler records the Pod's node assignment through the API server.
+The kubelet on worker-2 observes the assigned Pod through the API.
+The kubelet examines the Pod specification (PodSpec).
+It coordinates container creation through the container runtime.
+It monitors the containers and carries out applicable health probes.
+It reports Pod and node status back through the API server.
+
