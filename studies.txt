@@ -67,3 +67,23 @@ It coordinates container creation through the container runtime.
 It monitors the containers and carries out applicable health probes.
 It reports Pod and node status back through the API server.
 
+Lesson 2.2
+
+Container runtime
+
+The runtime is responsible for operations such as preparing images, creating container execution environments, starting containers, and managing their lifecycle.
+
+CRI stands for Container Runtime Interface.
+
+CRI: Interface between Kubernetes' kubelet and a container runtime.
+OCI: Open Container Initiative standards for container image formats and execution behavior.
+
+Lesson 2.3
+
+Pods have IP addresses and when they are replaced the address changes.
+A Service provides a stable logical networking endpoint for accessing a set of Pods.
+
+In common Linux configurations, kube-proxy observes Services and EndpointSlices through the Kubernetes API.
+
+An EndpointSlice contains information about network endpoints, including eligible Pod addresses used by Services.
+kube-proxy then configures the node's networking rules to implement Service traffic forwarding.
