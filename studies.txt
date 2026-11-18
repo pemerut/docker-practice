@@ -87,3 +87,43 @@ In common Linux configurations, kube-proxy observes Services and EndpointSlices 
 
 An EndpointSlice contains information about network endpoints, including eligible Pod addresses used by Services.
 kube-proxy then configures the node's networking rules to implement Service traffic forwarding.
+
+Lesson 2.4 
+
+Step 1 — You submit the configuration
+Step 2 — The API server processes the request
+Step 3 — The Deployment controller reacts
+Step 4 — The ReplicaSet controller reacts
+Step 5 — The scheduler assigns the Pods
+Step 6 — The kubelets observe their assigned Pods
+Step 7 — Container runtimes start the workloads
+Step 8 — Kubernetes observes the results
+Step 9 — Continuous reconciliation begins
+
+Lesson 2.5
+
+Kubernetes components generally communicate changes to cluster state through the API server.
+
+The Kubernetes API watch is a mechanism that allows clients to subscribe to a continuous stream of events for specific resources or collections, enabling real-time monitoring of changes without the inefficiency of polling.
+Instead of repeatedly asking "did anything change?", the API server keeps an HTTP connection open and sends JSON-encoded events immediately when a resource is created, updated, or removed.
+
+Lesson 2.6
+
+kube-apiserver
+    - API requests fail; cluster management is disrupted. Existing containers can continue running.
+etcd (quorum lost)
+    - Persistent cluster changes cannot normally be committed; API operations and reconciliation are affected.
+kube-scheduler
+    - Newly created, unscheduled Pods cannot normally receive automatic node assignments. Existing assigned Pods can continue.
+kube-controller-manager
+    - Controllers stop reconciling; missing Pods may not be replaced by their controllers, and other controller-managed operations stall.
+kubelet
+    - The node loses its Kubernetes execution agent; its containers might continue running temporarily, but management and status reporting are disrupted.
+Container runtime
+    - Starting or managing containers fails; effects on already-running containers depend on runtime failure details.
+kube-proxy
+    - Service routing rules may stop updating. Existing rules might continue working, depending on the implementation.
+CNI networking implementation
+    - Pod network creation or connectivity can fail, depending on the type of failure.
+CoreDNS
+    - DNS lookups inside the cluster may fail while some direct IP connectivity remains functional.
