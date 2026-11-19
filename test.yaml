@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: go-api
+  namespace: development
+
+  labels:
+    app: go-api
+    tier: backend
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: go-api
+
+  template:
+    metadata:
+      labels:
+        app: go-api
+
+    spec:
+      containers:
+        - name: go-api
+          image: registry.example.com/go-api:v1
+
+          ports:
+            - containerPort: 8080

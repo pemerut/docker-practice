@@ -151,3 +151,11 @@ It is primarily designed for managing stateless applications, ensuring that a sp
 A Kubernetes Service is an API object that provides a stable network endpoint and DNS name for a logical group of Pods, abstracting away their ephemeral IP addresses.
 It enables reliable service discovery and built-in load balancing by routing traffic from the Service’s static virtual IP (ClusterIP) to healthy, matching Pods based on label selectors.
 
+Lesson 4
+
+Level 1: The Deployment object
+Level 2: Deployment metadata
+Level 3: Deployment specification
+Level 4: Deployment selector
+Level 5: Pod template
+Level 6: Container specification
