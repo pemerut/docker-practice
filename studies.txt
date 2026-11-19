@@ -127,3 +127,27 @@ CNI networking implementation
     - Pod network creation or connectivity can fail, depending on the type of failure.
 CoreDNS
     - DNS lookups inside the cluster may fail while some direct IP connectivity remains functional.
+
+
+Lesson 2.7
+
+Static Pods in Kubernetes are workloads managed directly by the kubelet daemon on a specific node, bypassing the Kubernetes API server and scheduler for creation and lifecycle management. 
+Unlike standard pods, they are defined by YAML or JSON manifest files placed in a designated directory or served via a web URL, which the kubelet continuously monitors to start, restart, or delete pods. 
+
+The primary use case for static pods is bootstrapping and maintaining critical control plane components such as the kube-apiserver, etcd, kube-scheduler, and kube-controller-manager.
+
+cloud-controller-manager
+
+Its responsibility is integrating Kubernetes with a cloud provider.
+
+For example, in an AWS environment, cloud integration may help manage node information, infrastructure-specific networking, or cloud load balancers.
+
+
+Lesson 3
+
+A Kubernetes Deployment is a resource object that provides declarative updates to applications, allowing users to describe an application’s life cycle, including which container images to use, the desired number of pods, and how updates should be applied. 
+It is primarily designed for managing stateless applications, ensuring that a specified number of pod replicas remain running and healthy by automatically replacing failed instances and managing rolling updates or rollbacks to minimize downtime. 
+
+A Kubernetes Service is an API object that provides a stable network endpoint and DNS name for a logical group of Pods, abstracting away their ephemeral IP addresses.
+It enables reliable service discovery and built-in load balancing by routing traffic from the Service’s static virtual IP (ClusterIP) to healthy, matching Pods based on label selectors.
+
