@@ -93,3 +93,34 @@ If it fails, the Pod may become NotReady.
 Readiness - Pod becomes unready for Service traffic
 Liveness - Container restart
 Startup - Continued startup checks, followed by restart if the failure threshold is reached
+
+
+lesson 7
+
+A ReplicaSet is a Kubernetes workload resource that maintains a desired number of matching Pod replicas.
+Without a higher-level workload controller, Kubernetes won't automatically recreate an arbitrary standalone Pod just because it was deleted.
+
+spec:
+  replicas: 3
+
+- The ReplicaSet controller continuously works to maintain three matching Pod objects.
+
+- ReplicaSet controller creates or deletes Pod objects.
+- Scheduler assigns unscheduled Pods to nodes.
+- Kubelet coordinates their execution.
+- Container runtime runs their containers.
+The ReplicaSet is concerned with maintaining the desired number of Pods.
+
+
+lesson 8
+
+A Deployment is a higher-level Kubernetes workload resource that manages ReplicaSets and provides declarative application updates.
+
+Deployments provide these higher-level capabilities.
+1. Introduce the new application version.
+2. Manage the transition from old Pods to new Pods.
+3. Maintain application availability where possible.
+4. Track rollout revisions.
+5. Roll back if the new version fails.
+
+During a rolling update, a Deployment may temporarily manage both old and new ReplicaSets.
