@@ -64,3 +64,13 @@ Succeeded - All relevant containers completed successfully and won't restart
 Failed - All relevant containers terminated, and at least one failed
 Unknown - Kubernetes cannot determine the Pod's current state
 
+
+lesson 4.0
+
+A Pod has a lifecycle phase.
+Each container inside that Pod has its own state.
+
+Waiting	- The container isn't currently running and is waiting to start or restart
+Running	- The container process is executing
+Terminated - The container process has finished execution
+
