@@ -5,3 +5,40 @@ A Pod can contain:
 2. Shared networking resources.
 3. Shared storage volumes.
 4. Configuration governing how the containers execute.
+
+
+lesson 2.1
+
+Containers inside the same Pod share a network namespace.
+
+This means they share:
+- A Pod IP address.
+- Network interfaces.
+- The same TCP/UDP port space.
+
+Containers within the same Pod can communicate through localhost.
+Containers in different Pods normally communicate using Pod IP addresses or Services.
+
+
+lesson 2.2
+
+Go container
+    |
+    | Writes logs
+    v
+Shared volume
+    |
+    | Reads logs
+    v
+Logging container
+
+Kubernetes mounts the configured volume into both containers.
+
+lesson 2.3
+
+A sidecar is an auxiliary container that supports a primary application container.
+
+Log processing
+Proxying network traffic
+Refreshing shared configuration or content
+Providing supporting functionality
