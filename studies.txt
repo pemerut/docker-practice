@@ -124,3 +124,29 @@ Deployments provide these higher-level capabilities.
 5. Roll back if the new version fails.
 
 During a rolling update, a Deployment may temporarily manage both old and new ReplicaSets.
+
+
+lesson 10
+
+RollingUpdate - Rather than terminating every existing Pod immediately, Kubernetes gradually introduces new Pods while removing old ones.
+The objective is to maintain application availability while introducing the new version.
+
+maxSurge
+This controls how many extra Pods Kubernetes can create above the desired replica count during a rolling update.
+
+maxUnavailable
+This controls the maximum number of desired replicas that may be unavailable during the rollout.
+
+replicas: 4
+
+strategy:
+  type: RollingUpdate
+
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+
+Recreate - With Recreate, Kubernetes terminates the old application Pods before creating the new ones.
+This strategy can cause downtime.
+
+However, it may be appropriate when application versions cannot safely coexist.
