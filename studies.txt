@@ -42,3 +42,25 @@ Log processing
 Proxying network traffic
 Refreshing shared configuration or content
 Providing supporting functionality
+
+
+lesson 3.0
+
+Kubernetes tracks the Pod's overall condition through its status fields.
+
+status:
+  phase: Running
+
+The Pod phase represents a high-level summary of its lifecycle.
+
+
+lesson 3.1
+
+There are five possible Pod phases.
+
+Pending - Kubernetes accepted the Pod, but its containers haven't finished preparation for execution
+Running - The Pod is assigned to a node, its containers have been created, and at least one is running or starting/restarting
+Succeeded - All relevant containers completed successfully and won't restart
+Failed - All relevant containers terminated, and at least one failed
+Unknown - Kubernetes cannot determine the Pod's current state
+
