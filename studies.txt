@@ -74,3 +74,22 @@ Waiting	- The container isn't currently running and is waiting to start or resta
 Running	- The container process is executing
 Terminated - The container process has finished execution
 
+
+lesson 5
+
+You want Kubernetes to know when the application is ready to serve HTTP requests.
+readinessProbe:
+  httpGet:
+    path: /health
+    port: 8080
+
+  initialDelaySeconds: 2
+  periodSeconds: 5
+
+This tells the kubelet to periodically make an HTTP request to your application's /health endpoint.
+If the probe succeeds, the container can be considered ready.
+If it fails, the Pod may become NotReady.
+
+Readiness - Pod becomes unready for Service traffic
+Liveness - Container restart
+Startup - Continued startup checks, followed by restart if the failure threshold is reached
