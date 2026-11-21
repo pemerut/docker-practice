@@ -26,3 +26,41 @@ Connect Pods running on different nodes.
 Implement network policies.
 Use overlays, native routing, eBPF, or other networking techniques.
 
+
+lesson 4.1
+
+A Pod can disappear and be replaced by a new Pod with a different IP address.
+If clients connect directly to those addresses, they must somehow discover replacements whenever the Pod population changes.
+
+A Service provides a stable networking abstraction over a set of backends.
+
+lesson 4.2
+
+Service indentify pods by labels and selectors
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-api
+spec:
+  type: ClusterIP
+  selector:
+    app: go-api
+  ports:
+    - port: 80
+      targetPort: 8080
+
+
+lesson 4.3
+
+An EndpointSlice is a Kubernetes API resource describing a set of network endpoints used by Services.
+For a normal Service with a selector, the EndpointSlice controller maintains information about matching Pods.
+
+Pod IP addresses.
+Ports.
+Endpoint readiness conditions.
+Node and zone information.
+
+A Service doesn't directly contain all of its backend Pod IPs.
+EndpointSlices provide the scalable endpoint representation.
+
