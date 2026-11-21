@@ -64,3 +64,16 @@ Node and zone information.
 A Service doesn't directly contain all of its backend Pod IPs.
 EndpointSlices provide the scalable endpoint representation.
 
+
+lesson 5
+
+ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 30080
+
+port: 80 - The port exposed by the Service within the cluster
+targetPort: 8080 -The port on the backend Pod to which traffic is forwarded
+nodePort: 30080	- The port allocated on each node for NodePort access
+
+
