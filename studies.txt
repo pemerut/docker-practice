@@ -11,3 +11,18 @@ the application to know which physical node hosts the destination.
 
 lesson 2.1
 
+Kubernetes uses them as part of container networking.
+
+lesson 3.1
+
+CNI stands for Container Network Interface.
+
+It defines an interface through which container runtimes and network plugins coordinate container networking.
+
+Configure Pod network interfaces.
+Assign Pod IP addresses.
+Configure routes.
+Connect Pods running on different nodes.
+Implement network policies.
+Use overlays, native routing, eBPF, or other networking techniques.
+
