@@ -1,13 +1,12 @@
 apiVersion: v1
-kind: Pod
-
+kind: Service
 metadata:
   name: go-api
-
 spec:
-  containers:
-    - name: go-server
-      image: registry.example.com/go-api:v1
-
-      ports:
-        - containerPort: 8080
+  type: NodePort
+  selector:
+    app: go-api
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 30080
