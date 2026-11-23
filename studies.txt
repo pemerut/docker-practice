@@ -141,3 +141,16 @@ spec:
   type: ExternalName
   externalName: database.example.com
 
+
+8.0 CoreDNS
+
+go-api.default.svc.cluster.local
+
+go-api	Service name
+default	Namespace
+svc	Kubernetes Service DNS domain
+cluster.local	Cluster DNS domain, commonly the default
+
+
+lesson 9.0
+
