@@ -76,3 +76,68 @@ port: 80 - The port exposed by the Service within the cluster
 targetPort: 8080 -The port on the backend Pod to which traffic is forwarded
 nodePort: 30080	- The port allocated on each node for NodePort access
 
+
+lesson 6
+
+ClusterIP	- Expose an application inside the cluster
+NodePort - Expose a Service using a port on cluster nodes
+LoadBalancer	- Request an external load balancer from a compatible implementation
+ExternalName	- Map a Service DNS name to an external DNS name
+
+
+6.1
+
+ClusterIP is the default Kubernetes Service type that assigns a stable,
+internal virtual IP address to a group of pods, enabling reliable load-balanced communication
+only within the cluster. ⁠
+
+Service: go-api
+ClusterIP: 10.96.0.50
+Port: 80
+
+An application inside the cluster could access:
+http://10.96.0.50:80
+
+or
+
+http://go-api:80
+
+
+6.2
+
+NodePort is a Kubernetes Service type that exposes an application externally by opening a static port
+(default range 30000–32767) on every Node's IP address in the cluster.
+It functions by building on top of the default ClusterIP service, automatically allocating a ClusterIP
+and routing incoming traffic from any node to the appropriate backend Pods.
+
+External Access: Clients can reach the application via http://<NodeIP>:<NodePort> from outside the cluster.
+
+
+6.3 LoadBalancer
+
+Integrates with an external load-balancer implementation.
+
+Internet
+    |
+    v
+AWS Load Balancer
+    |
+    v
+Kubernetes Service
+    |
+    v
+Go API Pod
+
+
+6.4 ExternalName
+
+It provides a DNS alias to another DNS name.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-database
+spec:
+  type: ExternalName
+  externalName: database.example.com
+
