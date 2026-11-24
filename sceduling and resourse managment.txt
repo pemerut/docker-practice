@@ -242,3 +242,31 @@ A Pod is BestEffort when its containers have no CPU or memory requests or limits
 
 Under resource pressure, they may be more vulnerable to eviction.
 BestEffort is always evicted first, followed by Burstable, followed by Guaranteed.
+
+
+8.1 Eviction
+
+An eviction occurs when Kubernetes removes a Pod from a node for certain operational reasons.
+
+For example, a node may experience:
+- Memory pressure.
+- Disk pressure.
+- Inode exhaustion.
+
+The kubelet can evict Pods to protect node stability.
+
+Multiple application processes consume almost all available memory, and the node crosses its memory-pressure threshold.
+The kubelet may terminate selected Pods to recover resources.
+This is called node-pressure eviction.
+
+
+8.2 Preemption
+
+Preemption is related to scheduling priority.
+
+The scheduler may determine that removing one or more lower-priority Pods would make room for a high-priority Pod.
+
+Eviction under node pressure	Protect node stability	kubelet
+Preemption	Make scheduling room for higher-priority workloads	Scheduler
+OOM kill	Enforce memory constraints or respond to memory exhaustion	Linux kernel
+
