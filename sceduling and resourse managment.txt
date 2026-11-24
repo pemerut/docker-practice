@@ -270,3 +270,24 @@ Eviction under node pressure	Protect node stability	kubelet
 Preemption	Make scheduling room for higher-priority workloads	Scheduler
 OOM kill	Enforce memory constraints or respond to memory exhaustion	Linux kernel
 
+
+9.1 Cordon
+
+kubectl cordon worker-1
+
+This marks the node as unschedulable to new Pods handled by the normal scheduler.
+Existing Pods normally continue running.
+
+
+9.2 Drain
+
+kubectl drain worker-1 --ignore-daemonsets
+
+A drain marks the node unschedulable and attempts to safely evict eligible workloads.
+
+
+9.3 Uncordon
+
+kubectl uncordon worker-1
+
+The node can again receive new scheduled Pods, provided it's otherwise eligible.
