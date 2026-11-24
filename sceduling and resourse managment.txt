@@ -192,3 +192,53 @@ Relevant controllers may then evict affected Pods according to configured tolera
 This connects scheduling policies to cluster self-healing.
 
 
+7 — Quality of Service (QoS)
+
+Kubernetes assigns Pods a Quality of Service class based on their resource configuration.
+
+The traditional three QoS classes are:
+- Guaranteed
+- Burstable
+- BestEffort
+
+hese classifications matter particularly when a node experiences resource pressure.
+
+
+7.1 Guaranteed
+
+A Pod receives Guaranteed QoS when all its containers have CPU and memory requests and limits
+with the request equal to the limit for each resource.
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "512Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+The Pod qualifies for Guaranteed QoS.
+That doesn't mean it can never fail or be evicted.
+
+
+7.2 Burstable
+
+A Pod is Burstable when it has some relevant resource configuration but doesn't qualify for Guaranteed.
+
+resources:
+  requests:
+    cpu: "250m"
+    memory: "256Mi"
+  limits:
+    cpu: "1000m"
+    memory: "512Mi"
+
+It's allowed to consume above its requests up to the applicable limits.
+
+
+7.3 BestEffort
+
+A Pod is BestEffort when its containers have no CPU or memory requests or limits.
+
+Under resource pressure, they may be more vulnerable to eviction.
+BestEffort is always evicted first, followed by Burstable, followed by Guaranteed.
