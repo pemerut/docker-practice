@@ -1,0 +1,22 @@
+1.1 What exactly is scheduling?
+
+Scheduling is the process of selecting a suitable node for a Pod that hasn't yet been assigned to one.
+
+The scheduler doesn't start containers.
+Its responsibility is to determine which node should run a Pod.
+
+
+1.2 The two primary scheduling stages
+
+The scheduler evaluates candidate nodes using two main stages.
+
+Filtering: Eliminate nodes that cannot satisfy the Pod's requirements.
+Scoring: Rank the remaining eligible nodes and select a suitable candidate.
+
+Besides insufficient resources, a node might be ineligible because of:
+- A restrictive node selector.
+- Required node affinity.
+- An untolerated taint.
+- Storage or volume placement constraints.
+- Pod affinity or anti-affinity requirements.
+- Node availability or other scheduling restrictions.
