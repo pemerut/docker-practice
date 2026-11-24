@@ -93,3 +93,53 @@ Reason:     OOMKilled
 Exit Code:  137
 
 A memory limit breach can result in termination, unlike ordinary CPU throttling.
+
+
+4.1 Capacity versus allocatable
+
+Kubernetes distinguishes between:
+
+Capacity: The total amount of a resource reported for a node.
+
+Allocatable: The amount of that resource made available for Pods after accounting for certain system and eviction reservations.
+
+Overcommitment means allowing workloads to collectively have access to more potential resource consumption than the machine can physically provide simultaneously.
+
+
+5.1 - Node labels
+
+Nodes can have labels, just like Pods.
+
+disktype: ssd
+environment: production
+
+Kubernetes can use these labels as part of node selection.
+
+
+5.2 nodeSelector
+
+spec:
+  nodeSelector:
+    disktype: ssd
+
+This creates a mandatory requirement.
+The scheduler can consider only nodes with the matching label.
+
+If no node matches, the Pod can remain Pending.
+
+A node selector doesn't override CPU requirements or taints.
+The selected node must satisfy the other mandatory constraints too.
+
+
+5.3 Node affinity
+
+Node affinity provides more expressive scheduling rules.
+
+requiredDuringSchedulingIgnoredDuringExecution - Hard requirement when scheduling
+preferredDuringSchedulingIgnoredDuringExecution - Soft preference when scheduling
+
+RequiredDuringScheduling
+The scheduler must satisfy the rule to place the Pod.
+
+PreferredDuringScheduling
+The scheduler tries to satisfy the preference but may choose another suitable node.
