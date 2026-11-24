@@ -212,3 +212,49 @@ Gateway defines an HTTPS listener on port 443.
 HTTPRoute matches api.example.com.
 The matching request goes to the go-api Service.
 
+lesson 10
+
+You might want these security requirements:
+- Frontend Pods can contact the Go API.
+- Go API Pods can contact PostgreSQL.
+- Frontend Pods cannot directly access PostgreSQL.
+- Unrelated Pods cannot access your database.
+
+Kubernetes NetworkPolicies can express allowed ingress and egress traffic.
+
+
+10.1 Ingress versus egress
+
+ingress and egress describe the direction of traffic relative to a selected Pod.
+
+Ingress - Traffic entering the selected Pod
+Egress - Traffic leaving the selected Pod
+
+For example, the Go API's PostgreSQL connection is:
+- Egress traffic from the Go API Pod.
+- Ingress traffic to the PostgreSQL Pod.
+
+
+10.2 An example NetworkPolicy
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-api
+spec:
+  podSelector:
+    matchLabels:
+      app: go-api
+
+  policyTypes:
+    - Ingress
+
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              role: frontend
+
+      ports:
+        - protocol: TCP
+          port: 8080
