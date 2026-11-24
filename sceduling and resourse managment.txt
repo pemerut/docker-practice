@@ -57,3 +57,39 @@ Schedule this Pod onto a node that has sufficient allocatable CPU and memory cap
 ccounting for resources already requested by other Pods.
 
 The Pod might remain Pending with an Insufficient cpu scheduling event.
+
+
+3.0 Resource limits
+
+Requests and limits solve different problems.
+A request affects scheduling and resource allocation.
+A limit controls how much of a resource the container is allowed to consume.
+
+resources:
+  requests:
+    cpu: "250m"
+    memory: "256Mi"
+  limits:
+    cpu: "1000m"
+    memory: "512Mi"
+
+
+3.1 CPU limits
+
+The CPU limit is 1000m, equivalent to one CPU core of processing capacity.
+The container may use CPU above its request when CPU time is available, but the configured limit caps its CPU usage.
+
+When the container tries to exceed the CPU limit, Linux can throttle it.
+
+
+3.2 Memory limits
+
+The application experiences a memory leak and attempts to use more memory than its cgroup limit allows.
+The kernel may terminate a process using its Out-of-Memory (OOM) mechanism.
+
+Kubernetes could subsequently report:
+Last State: Terminated
+Reason:     OOMKilled
+Exit Code:  137
+
+A memory limit breach can result in termination, unlike ordinary CPU throttling.
