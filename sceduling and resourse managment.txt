@@ -20,3 +20,40 @@ Besides insufficient resources, a node might be ineligible because of:
 - Storage or volume placement constraints.
 - Pod affinity or anti-affinity requirements.
 - Node availability or other scheduling restrictions.
+
+
+2.0 CPU and memory requests
+
+Kubernetes needs to understand how many resources an application requires.
+
+resources:
+  requests:
+    cpu: "250m"
+    memory: "256Mi"
+
+
+2.1 CPU units
+
+Kubernetes commonly expresses CPU resources in cores or millicores.
+
+cpu: "250m"  -  requesting 0.25 CPU
+It doesn't mean the Pod receives exclusive ownership of 25% of a physical processor.
+
+
+2.2 Memory units
+
+Kubernetes supports binary memory units such as:
+
+Ki	1,024 bytes
+Mi	1,048,576 bytes
+Gi	1,073,741,824 bytes
+
+
+2.3 resource request
+
+A request tells Kubernetes the amount of a resource to account for when placing a Pod and allocating its resource share.
+
+Schedule this Pod onto a node that has sufficient allocatable CPU and memory capacity
+ccounting for resources already requested by other Pods.
+
+The Pod might remain Pending with an Insufficient cpu scheduling event.
