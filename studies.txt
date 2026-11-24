@@ -154,3 +154,61 @@ cluster.local	Cluster DNS domain, commonly the default
 
 lesson 9.0
 
+How does external HTTP traffic enter the cluster?
+https://api.example.com
+
+9.1 Ingress
+
+An Ingress object declares HTTP and HTTPS routing rules.
+
+Ingress rules can express this routing configuration.
+However, the Ingress object doesn't actually receive HTTP traffic.
+You need an Ingress controller that implements those rules.
+
+An Ingress controller may configure a reverse proxy or other load-balancing implementation.
+An Ingress controller can perform a related function, but it receives its intended routing configuration through Kubernetes resources.
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: go-api-ingress
+spec:
+  rules:
+    - host: api.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: go-api
+                port:
+                  number: 80
+
+9.2 Gateway API
+
+Gateway API provides a more expressive and extensible approach to traffic routing.
+
+GatewayClass	- Identifies the implementation/controller managing Gateway infrastructure
+Gateway	- Describes a traffic entry point and its listeners
+HTTPRoute	- Specifies HTTP routing rules and backend destinations
+
+GatewayClass
+     |
+     v
+Gateway
+     |
+     v
+HTTPRoute
+     |
+     v
+Service
+     |
+     v
+Pods
+
+GatewayClass identifies the controller implementation.
+Gateway defines an HTTPS listener on port 443.
+HTTPRoute matches api.example.com.
+The matching request goes to the go-api Service.
+
