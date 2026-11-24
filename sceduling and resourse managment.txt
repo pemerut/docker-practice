@@ -143,3 +143,52 @@ The scheduler must satisfy the rule to place the Pod.
 
 PreferredDuringScheduling
 The scheduler tries to satisfy the preference but may choose another suitable node.
+
+
+5.4 Pod affinity and anti-affinity
+
+Node affinity looks at node labels.
+Pod affinity and anti-affinity look at other Pods.
+
+For example:
+- Pod affinity: Prefer running a frontend near a related backend.
+- Pod anti-affinity: Avoid placing all three Go API replicas on the same node.
+
+
+6.1 - Taints
+
+A taint is applied to a Node.
+
+kubectl taint nodes gpu-worker dedicated=gpu:NoSchedule
+
+Key - dedicated
+Value - gpu
+Effect - NoSchedule
+
+
+6.2 What is a toleration?
+
+A toleration is applied to a Pod.
+It tells the scheduler that the Pod can tolerate a matching node taint.
+
+tolerations:
+  - key: dedicated
+    operator: Equal
+    value: gpu
+    effect: NoSchedule
+
+A toleration does not force a Pod onto a node.
+It merely prevents the matching taint from excluding that Pod.
+
+
+6.3 The three taint effects
+
+NoSchedule	Blocks newly scheduled Pods without a matching toleration
+PreferNoSchedule	Soft scheduling restriction; scheduler tries to avoid the node
+NoExecute	Can prevent scheduling and evict existing Pods that don't tolerate the taint
+
+When a node becomes NotReady or unreachable, Kubernetes can apply condition-based taints.
+Relevant controllers may then evict affected Pods according to configured tolerations and timing.
+This connects scheduling policies to cluster self-healing.
+
+
