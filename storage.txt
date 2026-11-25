@@ -276,3 +276,41 @@ Supports ordered identity-aware deployment and update behavior
 Each Pod can have its own persistent storage claim.
 When postgres-0 is replaced, the new Pod can use the existing claim associated with that identity.
 
+
+9.1 ConfigMap
+
+A ConfigMap is an API object containing non-sensitive key-value configuration data.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: go-api-config
+data:
+  APP_ENV: "production"
+  LOG_LEVEL: "info"
+  HTTP_PORT: "8080"
+  DB_HOST: "postgres.default.svc.cluster.local"
+
+
+9.2 Environment-variable injection
+
+A Deployment can reference a ConfigMap:
+
+env:
+  - name: LOG_LEVEL
+    valueFrom:
+      configMapKeyRef:
+        name: go-api-config
+        key: LOG_LEVEL
+
+
+The container then receives: LOG_LEVEL=info
+
+
+9.3 What happens if a ConfigMap changes
+
+Environment variables: Normally remain unchanged inside a running container.
+The Pod must be recreated to receive updated values.
+
+Mounted ConfigMap files: Kubernetes can eventually update the mounted files automatically, but the application may need to reload them.
+Mounts using subPath don't receive the usual automatic updates.
