@@ -184,3 +184,16 @@ WaitForFirstConsumer: Provisioning or binding is delayed until a Pod consuming t
 allowing topology constraints to be considered.
 
 For topology-constrained storage, WaitForFirstConsumer can help avoid volumes being created in unsuitable locations.
+
+
+5.0 Access modes
+
+Some volumes can be attached to only one node for writing. Others support access from multiple nodes.
+
+ReadWriteOnce (RWO)	- Read-write access by one node
+ReadOnlyMany (ROX) - Read-only access from multiple nodes
+ReadWriteMany (RWX) - Read-write access from multiple nodes
+ReadWriteOncePod (RWOP) - Read-write use restricted to a single Pod, with supported CSI storage
+
+A ReadWriteOnce volume may be used by multiple Pods running on the same node, where the storage backend supports that arrangement.
+
