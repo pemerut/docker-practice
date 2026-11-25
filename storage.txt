@@ -133,3 +133,54 @@ This design separates the application consuming storage from the administrator o
 When Kubernetes successfully associates a PVC with a suitable PV, the claim enters the Bound phase.
 
 A PVC may also remain Pending while waiting for an appropriate PV or dynamic provisioning.
+
+
+4.1 Static versus dynamic provisioning
+
+Static - An administrator provisions storage and creates a PV. A compatible PVC can bind to it.
+Dynamic - A PVC requests a StorageClass, and a provisioner creates suitable storage automatically.
+
+A StorageClass defines a category of storage and the mechanism used to provision it.
+The classes could represent different storage backends or performance characteristics.
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data
+spec:
+  storageClassName: fast-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+
+
+4.2 The important StorageClass fields
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-storage
+provisioner: csi.example.com
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+
+The provisioner name is illustrative. It would need to reference a real installed storage driver.
+
+provisioner - The storage provisioner responsible for creating volumes
+reclaimPolicy - What should happen when a dynamically provisioned volume is released
+volumeBindingMode - When volume provisioning and binding occur
+allowVolumeExpansion - Whether the class supports requested expansion of existing volumes
+
+
+4.3 Immediate versus WaitForFirstConsumer
+
+Immediate: Provisioning and binding happen when the PVC is created,
+without waiting for a consuming Pod's scheduling constraints.
+
+WaitForFirstConsumer: Provisioning or binding is delayed until a Pod consuming the PVC participates in scheduling,
+allowing topology constraints to be considered.
+
+For topology-constrained storage, WaitForFirstConsumer can help avoid volumes being created in unsuitable locations.
