@@ -197,3 +197,35 @@ ReadWriteOncePod (RWOP) - Read-write use restricted to a single Pod, with suppor
 
 A ReadWriteOnce volume may be used by multiple Pods running on the same node, where the storage backend supports that arrangement.
 
+
+6.0 CSI
+
+CRI: Container Runtime Interface
+CNI: Container Network Interface
+
+CSI — Container Storage Interface.
+CSI is the standard interface used to integrate storage systems with container orchestration platforms.
+
+
+6.1 What does CSI do
+
+Depending on the driver and backend, CSI integration can coordinate operations such as:
+- Creating and deleting volumes.
+- Attaching volumes to nodes.
+- Preparing and mounting volumes.
+- Expanding volumes.
+- Creating storage snapshots when supported.
+
+
+6.2 PVC Bound does not guarantee a successful mount
+
+PVC: Bound
+Pod: ContainerCreating
+
+Possible reasons include:
+- The volume cannot attach to the selected node.
+- Storage topology is incompatible.
+- A CSI driver is unhealthy.
+- Mounting fails.
+- Another node is using a volume that doesn't support the requested concurrent attachment.
+
