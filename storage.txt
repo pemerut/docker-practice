@@ -229,3 +229,29 @@ Possible reasons include:
 - Mounting fails.
 - Another node is using a volume that doesn't support the requested concurrent attachment.
 
+
+7.0 — Reclaim policies and data deletion
+
+Normally, deleting a Pod doesn't automatically delete its PVC.
+But what if the PVC itself is deleted?
+That is where the PersistentVolume's reclaim policy matters.
+
+There are two current main reclaim policies.
+
+
+7.1 Delete
+
+persistentVolumeReclaimPolicy: Delete
+
+When the associated claim is deleted and the storage is released, Kubernetes and the provisioner
+normally arrange to delete the PV and underlying storage asset.
+
+This can permanently destroy data.
+
+
+7.2 Retain
+
+persistentVolumeReclaimPolicy: Retain
+
+Kubernetes preserves the underlying storage asset after the claim is deleted.
+An administrator must then handle recovery, cleanup, or reuse.
