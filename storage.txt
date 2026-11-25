@@ -1,0 +1,78 @@
+1.1 Pods are ephemeral
+
+A Kubernetes controller creates a replacement Pod with a new container.
+
+Application lifecycle and data lifecycle should be independent
+when data must survive workload replacement.
+
+
+1.2 Storage during different kinds of failures
+
+A PersistentVolume does not guarantee that data can always move between nodes.
+A local disk, for example, is tied to a particular machine.
+
+It also doesn't replace database backups.
+persistent storage can outlive the Pod using it
+
+
+2.1 Volumes versus volume mounts
+
+A Pod's volumes field describes the storage source.
+
+A container's volumeMounts field describes where that storage appears inside the container.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example
+spec:
+  containers:
+    - name: app
+      image: busybox:1.36
+      command: ["sleep", "3600"]
+      volumeMounts:
+        - name: shared-data
+          mountPath: /app/data
+
+  volumes:
+    - name: shared-data
+      emptyDir: {}
+
+The name connects the volume definition to the container's mount.
+The mountPath tells Kubernetes where to make the storage available inside that container.
+
+
+2.2 What is emptyDir
+
+An emptyDir is a temporary volume associated with a Pod.
+Kubernetes creates it when the Pod is assigned to a node and the storage is prepared.
+It initially contains no files. The volume can be shared by multiple containers in the same Pod.
+
+could use it for:
+- Temporary files.
+- A shared cache.
+- Files exchanged between application and sidecar containers.
+- Intermediate processing data.
+
+An emptyDir generally survives individual container restarts while the Pod continues to exist on the node.
+emptyDir is ephemeral storage, not persistent storage.
+
+
+2.3 What is hostPath
+
+A hostPath volume mounts a file or directory from the worker node's filesystem into a Pod.
+
+volumes:
+  - name: host-data
+    hostPath:
+      path: /srv/application-data
+      type: Directory
+
+This connects the Pod to a specific path on its node.
+
+Suppose the Pod originally runs on Worker 1 and is replaced on Worker 2.
+The replacement Pod would use /srv/application-data on Worker 2,
+which is not automatically the same data as on Worker 1.
+
+Furthermore, hostPath can expose sensitive host files to containers and introduces security risks.
+
