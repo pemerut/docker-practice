@@ -76,3 +76,60 @@ which is not automatically the same data as on Worker 1.
 
 Furthermore, hostPath can expose sensitive host files to containers and introduces security risks.
 
+
+3.0 PersistentVolumes and PersistentVolumeClaims
+
+- abstractions that separate an application's storage requirements from the underlying storage infrastructure.
+
+he three most important objects are:
+- PersistentVolume (PV)
+- PersistentVolumeClaim (PVC)
+- StorageClass
+
+
+3.1 PersistentVolume (PV)
+
+A PersistentVolume is a cluster-scoped Kubernetes API resource representing a provisioned piece of storage.
+
+For example, a PV may represent storage backed by:
+- A cloud block storage volume.
+- An NFS-based storage system.
+- A CSI-managed storage system.
+- A local persistent disk.
+
+The PersistentVolume object describes storage properties, including capacity, access modes, and storage-specific details.
+It's a Kubernetes resource representing that storage.
+
+
+3.2 PersistentVolumeClaim (PVC)
+
+A PersistentVolumeClaim is a request for storage made by a workload or user.
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+The PVC doesn't normally care whether the capacity comes from AWS EBS, a network storage appliance,
+or another compatible backend.
+
+
+3.3 PV versus PVC: The relationship
+
+Pod → PVC → PV → Storage backend
+A PVC is namespaced, while a PV is cluster-scoped.
+
+This design separates the application consuming storage from the administrator or system providing it.
+
+
+3.4 What does Bound mean
+
+When Kubernetes successfully associates a PVC with a suitable PV, the claim enters the Bound phase.
+
+A PVC may also remain Pending while waiting for an appropriate PV or dynamic provisioning.
