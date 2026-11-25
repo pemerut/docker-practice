@@ -255,3 +255,24 @@ persistentVolumeReclaimPolicy: Retain
 
 Kubernetes preserves the underlying storage asset after the claim is deleted.
 An administrator must then handle recovery, cleanup, or reuse.
+
+
+8.1 Stateless versus stateful
+
+Stateful describes systems, applications, or protocols that retain memory of previous interactions and maintain context between requests.
+stateless describes a system, protocol, or application that does not retain information about past interactions or user sessions. 
+
+
+8.2 What is a StatefulSet
+
+A StatefulSet is a Kubernetes workload resource designed for applications that need stable Pod identity and, commonly, stable storage.
+
+Pods have stable ordinal identities
+Commonly used for stateful applications
+Pod names follow stable ordinals, such as postgres-0
+Supports per-Pod PVCs through volumeClaimTemplates
+Supports ordered identity-aware deployment and update behavior
+
+Each Pod can have its own persistent storage claim.
+When postgres-0 is replaced, the new Pod can use the existing claim associated with that identity.
+
