@@ -314,3 +314,33 @@ The Pod must be recreated to receive updated values.
 
 Mounted ConfigMap files: Kubernetes can eventually update the mounted files automatically, but the application may need to reload them.
 Mounts using subPath don't receive the usual automatic updates.
+
+
+10.0 Secrets
+
+Kubernetes provides Secrets for sensitive information.
+
+Common examples include:
+- Database passwords.
+- API tokens.
+- TLS certificates and private keys.
+- Registry credentials.
+
+10.1 Secret fields
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-credentials
+type: Opaque
+stringData:
+  password: "example-only-password"
+
+An application can reference the Secret similarly to a ConfigMap:
+
+env:
+  - name: DB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: postgres-credentials
+        key: password
