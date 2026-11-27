@@ -3,8 +3,9 @@ kind: Service
 metadata:
   name: story-service
 spec:
-  selector:
+  selector: 
     app: story
+  type: LoadBalancer
   ports:
     - protocol: "TCP"
       port: 80

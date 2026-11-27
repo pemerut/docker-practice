@@ -6,3 +6,19 @@ kubectl delete deployment app2
 kubectl get deployment
 No resources found in default namespace.
 
+kubectl apply -f=service.yaml -f=deploymeny.yaml 
+service/story-service created
+
+kubectl get deployment
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+story-deployment   1/1     1            1           63s
+
+minikube service story-service
+┌───────────┬───────────────┬─────────────┬──────────────┐
+│ NAMESPACE │     NAME      │ TARGET PORT │     URL      │
+├───────────┼───────────────┼─────────────┼──────────────┤
+│ default   │ story-service │             │ No node port │
+└───────────┴───────────────┴─────────────┴──────────────┘
+
+kubectl apply -f=service.yaml
+service/story-service configured
