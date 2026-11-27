@@ -1,8 +1,0 @@
-kubectl apply -f master-deployment.yaml
-service/backend created
-deployment.apps/app2 unchanged
-
-kubectl delete deployments,services -l grou
-p=example
-deployment.apps "app2" deleted from default namespace
-service "backend" deleted from default namespace
