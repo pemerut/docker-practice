@@ -1,0 +1,8 @@
+kubectl get deployments
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+app2   1/1     1            1           10d
+
+kubectl delete deployment app2
+kubectl get deployment
+No resources found in default namespace.
+
