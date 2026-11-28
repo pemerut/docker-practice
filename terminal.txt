@@ -1,36 +1,16 @@
-kubectl apply -f host-pv.yaml
-persistentvolume/host-pv created
+kubectl apply -f enviroment.yaml
+configmap/data-map created
 
-kubectl apply -f host-pvc.yaml
-persistentvolumeclaim/host-pvc created
+kubectl get configmap
+NAME               DATA   AGE
+data-map           1      26s
 
 kubectl apply -f deployment.yaml
 deployment.apps/story-deployment configured
 
-kubectl get pv
-NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
-host-pv   1Gi        RWO            Retain           Available           standard       <unset>     
-
-kubectl get pvc
-NAME       STATUS   VOLUME    CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-host-pvc   Bound    host-pv   1Gi        RWO            standard       <unset>                 42s
-
-kubectl get pv
-NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM              STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
-host-pv   1Gi        RWO            Retain           Bound    default/host-pvc   standard       <unset>                          4m58s
-
-
-docker build -t pemerut/story:2 .
-docker push pemerut/story:2
-
 kubectl get pods
-NAME                                READY   STATUS             RESTARTS   AGE
-story-deployment-7f98555855-d59pb   1/1     Running            0          23m
-story-deployment-7f98555855-mxlg4   1/1     Running            0          19m
-story-deployment-b985cf445-swg98    0/1     ImagePullBackOff   0          75s
-
-kubectl get pods
-NAME                               READY   STATUS    RESTARTS   AGE
-story-deployment-b985cf445-f64rd   1/1     Running   0          35s
-story-deployment-b985cf445-swg98   1/1     Running   0          2m8s
-
+NAME                                READY   STATUS        RESTARTS   AGE
+story-deployment-5d6cbc5bf9-77w8p   1/1     Running       0          7s
+story-deployment-5d6cbc5bf9-lwwbc   1/1     Running       0          8s
+story-deployment-b985cf445-f64rd    1/1     Terminating   0          7m30s
+story-deployment-b985cf445-swg98    1/1     Terminating   0          9m3s
